@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debtanu's Level 15 Upgrade!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
+        }
+        body {
+            background: #0d0f18;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 15px;
+        }
+        .card {
+            width: 100%;
+            max-width: 420px;
+            background: #161b26;
+            border: 3px solid #00f0ff;
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+        .badge {
+            background: #ff0055;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 12px;
+            box-shadow: 0 0 10px #ff0055;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        h1 {
+            font-size: 1.8rem;
+            color: #ffe600;
+            text-shadow: 2px 2px #ff0055;
+            margin-bottom: 10px;
+        }
+        .stats-box {
+            background: #0d0f18;
+            border: 1px dashed #00f0ff;
+            border-radius: 12px;
+            padding: 10px;
+            margin: 15px 0;
+            text-align: left;
+            font-size: 0.85rem;
+            color: #39ff14;
+        }
+        .cake-area {
+            font-size: 3.5rem;
+            margin: 15px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+        .candles {
+            font-size: 1.8rem;
+            transition: all 0.3s;
+        }
+        .btn {
+            background: linear-gradient(45deg, #00f0ff, #ff0055);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(255, 0, 85, 0.4);
+        }
+        .btn:active {
+            transform: scale(0.96);
+        }
+        .btn-secondary {
+            background: #252d3d;
+            border: 2px solid #ffe600;
+            color: #ffe600;
+        }
+        .hidden-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed rgba(255, 255, 255, 0.2);
+            animation: slideDown 0.5s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .meme-box {
+            background: #252d3d;
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 12px;
+            font-style: italic;
+            color: #00f0ff;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="badge">🚀 LEVEL 15 UNLOCKED</div>
+        <h1>DEBTANU PANDIT!</h1>
+        <p style="color: #aaa; font-size: 0.9rem;">Official 15th Birthday Upgrade Page</p>
+
+        <!-- Stats Box -->
+        <div class="stats-box">
+            ⚡ <b>CHARACTER STATS UPDATED:</b><br>
+            • Age: 14 ➔ <b>15</b><br>
+            • Brainpower: <b>+500 XP</b><br>
+            • Coolness: <b>MAX OVERLOAD 😎</b><br>
+            • Homework Resistance: <b>+99%</b>
+        </div>
+
+        <!-- Interactive Cake -->
+        <div class="cake-area" onclick="blowCandles()">
+            <div id="candles" class="candles">🕯️ 🕯️ 🕯️ 🕯️</div>
+            <div>🎂</div>
+        </div>
+
+        <button id="blowBtn" class="btn" onclick="blowCandles()">🔥 TAP TO BLOW CANDLES! 🔥</button>
+
+        <!-- Secret Card Content -->
+        <div id="secretCard" class="hidden-content">
+            <h3 style="color: #39ff14;">🎉 MAKE A WISH, DEBTANU! 🎉</h3>
+            <p style="font-size: 0.95rem; line-height: 1.5; color: #ddd; margin-top: 10px;">
+                You are officially 15! May your Wi-Fi always be fast, your snacks never run out, and your year ahead be packed with epic wins, zero stress, and legendary moments! 🥳
+            </p>
+
+            <button class="btn btn-secondary" onclick="generateMemeQuote()">🎲 Click for 15yo Advice Generator</button>
+            <div id="memeQuote" class="meme-box">Tap the button above to unlock wisdom! 👇</div>
+        </div>
+    </div>
+
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        // Sound Generator (Web Audio API)
+        function playBeep(freq, type, duration) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = type;
+                osc.frequency.value = freq;
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + duration);
+                osc.stop(ctx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        let isBlown = false;
+        function blowCandles() {
+            if (isBlown) return;
+            isBlown = true;
+
+            // Audio FX
+            playBeep(440, 'sine', 0.1);
+            setTimeout(() => playBeep(880, 'square', 0.3), 100);
+
+            // UI Changes
+            document.getElementById('candles').innerHTML = '💨 💨 💨 💨';
+            document.getElementById('blowBtn').style.display = 'none';
+            document.getElementById('secretCard').style.display = 'block';
+
+            // Confetti Explosion
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+            setTimeout(() => {
+                confetti({ particleCount: 100, angle: 60, spread: 60, origin: { x: 0 } });
+                confetti({ particleCount: 100, angle: 120, spread: 60, origin: { x: 1 } });
+            }, 250);
+        }
+
+        // Fun Meme Quotes for 15yo
+        const quotes = [
+            "“At 15, sleeping 10 hours counts as productive recovery.” 😴",
+            "“Legend says if you stay cool at 15, your phone battery stays at 100%.” 🔋",
+            "“Level 15 Pro-Tip: You don't get older, you just unlock better skills.” 🎮",
+            "“Warning: Being 15 may lead to sudden cravings for fast food and zero homework.” 🍔",
+            "“Happy 15th! Keep your friends close, and your charger closer.” 🔌"
+        ];
+
+        function generateMemeQuote() {
+            playBeep(600, 'triangle', 0.1);
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('memeQuote').innerText = randomQuote;
+        }
+    </script>
+</body>
+</html>
